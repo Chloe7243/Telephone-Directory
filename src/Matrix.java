@@ -2,33 +2,45 @@ import java.util.Scanner;
 
 public class Matrix {
     Matrix() {
-        int A1, A2, A3, A4, B1, B2, B3, B4;
-        System.out.println("========== Calculating multiplication of a 2 by 2 matrix==========");
+        int[][] matrix1 = new int[2][2];
+        int[][] matrix2 = new int[2][2];
+        int[][] result = new int[2][2];
+        System.out.println("========== Calculating multiplication of a 2 by 2 matrices ==========");
         System.out.println("Input your values based on this format:\n|A1 A2|   |B1 B2|\n|A3 A4| * |B3 B4|\n");
 
-//        GETS MATRIX INPUT
-        A1 = getValue("A1");
-        A2 = getValue("A2");
-        A3 = getValue("A3");
-        A4 = getValue("A4");
-        B1 = getValue("B1");
-        B2 = getValue("B2");
-        B3 = getValue("B3");
-        B4 = getValue("B4");
+         for (int i = 0; i < 2; i++) {
+            for (int j = 0; j < 2; j++) {
+                int currVal = i + j + (i == 1 ? 2 : 1);
+                System.out.print(i);
+                System.out.println(j);
+                matrix1[i][j] = getValue(String.format("A%d",(currVal)));
+                matrix2[i][j] = getValue(String.format("B%d",(currVal)));
+                System.out.print("\n");
+            }
+        }
 
 //        CALCULATES PRODUCT
-        int C1 = (A1 * B1) + (A2 * B3);
-        int C2 = (A1 * B2) + (A2 * B4);
-
-        int C3 = (A3 * B1) + (A4 * B3);
-        int C4 = (A3 * B2) + (A4 * B4);
+        for (int i = 0; i < 2; i++) {
+            for (int j = 0; j < 2; j++) {
+                result[i][j] = 0;
+                for (int k = 0; k < 2; k++) {
+                    result[i][j] += matrix1[i][k] * matrix2[k][j];
+                }
+            }
+        }
 
 //        PRINTS PRODUCT VALUE
-        System.out.println(String.format("Product is:\n| %d   %d|\n|%d %d|/n", C1, C2, C3, C4));
+        System.out.println("Result of product is:");
+        for (int i = 0; i < 2; i++) {
+            for (int j = 0; j < 2; j++) {
+                System.out.print(result[i][j] + " ");
+            }
+            System.out.println();
+        }
     }
     public static int getValue(String val) {
         Scanner read = new Scanner(System.in);
-        System.out.print(String.format("Value of %s:", val));
+        System.out.printf("Value of %s:", val);
         return read.nextInt();
     }
 }
