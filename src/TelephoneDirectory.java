@@ -20,7 +20,8 @@ public class TelephoneDirectory {
             System.out.println("4. Display contacts in a range");
             System.out.println("5. Display all contacts");
             System.out.println("6. Display contacts by first letter");
-            System.out.println("7. Quit");
+            System.out.println("7. Multiply 2 by 2 matrices");
+            System.out.println("8. Quit");
 
             option = input.nextInt();
 
@@ -50,11 +51,14 @@ public class TelephoneDirectory {
                     // display contacts by first letter
                     displayFirstLetter();
                 case 7 ->
+                    //noinspection InstantiationOfUtilityClass
+                    new Matrix();
+                case 8 ->
                     // quit
                         System.out.println("Goodbye.");
                 default -> System.out.println("Invalid option.\n");
             }
-        } while (option != 7);
+        } while (option != 8);
 
         input.close();
     }
@@ -79,6 +83,7 @@ public class TelephoneDirectory {
 
     static void addContact() {
         // add a contact
+        System.out.println("======== ADD A CONTACT ========");
         System.out.print("Enter name: ");
         String name = input.next();
         System.out.print("Enter age: ");
@@ -102,16 +107,24 @@ public class TelephoneDirectory {
 
     static void delContact() {
         // delete a contact
+        System.out.println("======== DELETE A CONTACT ========");
         System.out.print("Enter index of contact to delete: ");
         int index = input.nextInt();
         if (index >= 0 && index < n) {
-                } else {
+            for (int i = index; i < n - 1; i++) {
+                directory[i][0] = directory[i + 1][0];
+                directory[i][1] = directory[i + 1][1];
+                directory[i][2] = directory[i + 1][2];
+            }
+            n--;
+        } else {
             System.out.println("Invalid index.");
         }
     }
 
     static void retrieveContact() {
         // retrieve a contact
+        System.out.println("======== RETRIEVE A CONTACT ========");
         System.out.print("Enter index of contact to retrieve: ");
         int index = input.nextInt();
         if (index >= 0 && index < n) {
@@ -125,10 +138,12 @@ public class TelephoneDirectory {
 
     static void displayRange() {
         // display contacts in a range
+        System.out.println("======== DISPLAY CONTACTS IN A RANGE ========");
         System.out.print("Enter start index: ");
         int start = input.nextInt();
         System.out.print("Enter end index: ");
         int end = input.nextInt();
+        System.out.printf("======== CONTACTS IN RANGE [%d - %d] ========\n", start, end);
         if (start >= 0 && end >= start && end < n) {
             for (int i = start; i <= end; i++) {
                 System.out.printf("Name:%s\n", directory[i][0]);
@@ -143,10 +158,12 @@ public class TelephoneDirectory {
 
     static void displayAllContacts() {
         // display all contacts
+
         if(n == 0){
             System.out.println("You have no contacts yet.\n");
             return;
         }
+
         System.out.println("======= ALL CONTACTS ======");
         for (int i = 0; i < n; i++) {
             System.out.printf("Name: %s\n", directory[i][0]);
@@ -157,9 +174,11 @@ public class TelephoneDirectory {
 
     static void displayFirstLetter() {
         // display contacts by first letter
+        System.out.println("======== DISPLAY CONTACTS BY FIRST LETTER ========");
         System.out.print("Enter first letter: ");
         String letter = input.next();
         int none = 0;
+        System.out.printf("======== CONTACTS STARTING WITH %s ========\n", letter);
         for (int i = 0; i < n; i++) {
             if (directory[i][0].toLowerCase().startsWith(letter.toLowerCase())) {
                 System.out.printf("Name: %s\n", directory[i][0]);
