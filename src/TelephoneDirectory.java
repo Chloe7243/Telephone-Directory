@@ -10,6 +10,7 @@ public class TelephoneDirectory {
 
     TelephoneDirectory(){
 
+//        read the current directory if it exists
         readFile();
 
         do {
@@ -117,10 +118,12 @@ public class TelephoneDirectory {
     }
 
     static void delContact() {
-        // delete a contact
+//        Get index to delete
         System.out.println("======== DELETE A CONTACT ========");
         System.out.print("Enter index of contact to delete: ");
         int index = input.nextInt();
+
+//        Delete the contact from file
         if (index >= 0 && index < n) {
             for (int i = index; i < n - 1; i++) {
                 directory[i][0] = directory[i + 1][0];
@@ -136,10 +139,12 @@ public class TelephoneDirectory {
     }
 
     static void retrieveContact() {
-        // retrieve a contact
+        // retrieve a contact by index
         System.out.println("======== RETRIEVE A CONTACT ========");
         System.out.print("Enter index of contact to retrieve: ");
         int index = input.nextInt();
+
+        // display contact
         if (index >= 0 && index < n) {
             System.out.println("Name: " + directory[index][0]);
             System.out.println("Age: " + directory[index][1]);
@@ -154,10 +159,14 @@ public class TelephoneDirectory {
     static void displayRange() {
         // display contacts in a range
         System.out.println("======== DISPLAY CONTACTS IN A RANGE ========");
+
+        // get range
         System.out.print("Enter start index: ");
         int start = input.nextInt();
         System.out.print("Enter end index: ");
         int end = input.nextInt();
+
+        // display contacts in the range
         System.out.printf("======== CONTACTS IN RANGE [%d - %d] ========\n", start, end);
         if (start >= 0 && end >= start && end < n) {
             for (int i = start; i <= end; i++) {
@@ -193,10 +202,14 @@ public class TelephoneDirectory {
 
     static void displayFirstLetter() {
         // display contacts by first letter
+
+//        get first letter
         System.out.println("======== DISPLAY CONTACTS BY FIRST LETTER ========");
         System.out.print("Enter first letter: ");
         String letter = input.next();
         int none = 0;
+
+//        display contacts that start with the letter
         System.out.printf("======== CONTACTS STARTING WITH %s ========\n", letter);
         for (int i = 0; i < n; i++) {
             if (directory[i][0].toLowerCase().startsWith(letter.toLowerCase())) {
