@@ -23,7 +23,16 @@ public class TelephoneDirectory {
             System.out.println("7. Multiply 2 by 2 matrices");
             System.out.println("8. Quit");
 
-            option = input.nextInt();
+            System.out.print("Choose Option: ");
+
+            // Make Sure User Enters An Integer
+            try {
+                option = input.nextInt();
+            } catch (Exception e) {
+                System.out.println("Invalid option.\n");
+                input.next();
+                continue;
+            }
 
             switch (option) {
                 case 1 ->{
@@ -103,6 +112,8 @@ public class TelephoneDirectory {
         } catch (IOException e) {
             System.out.println("Error writing to file.");
         }
+
+        clearConsole();
     }
 
     static void delContact() {
@@ -120,6 +131,8 @@ public class TelephoneDirectory {
         } else {
             System.out.println("Invalid index.");
         }
+
+        clearConsole();
     }
 
     static void retrieveContact() {
@@ -134,6 +147,8 @@ public class TelephoneDirectory {
         } else {
             System.out.println("Invalid index.");
         }
+
+        clearConsole();
     }
 
     static void displayRange() {
@@ -154,6 +169,8 @@ public class TelephoneDirectory {
             System.out.println("Invalid range.\n");
         }
 
+        clearConsole();
+
     }
 
     static void displayAllContacts() {
@@ -170,6 +187,8 @@ public class TelephoneDirectory {
             System.out.printf("Age: %s\n", directory[i][1]);
             System.out.printf("Contact: %s\n\n", directory[i][2]);
         }
+
+        clearConsole();
     }
 
     static void displayFirstLetter() {
@@ -190,5 +209,15 @@ public class TelephoneDirectory {
         }
         if(none == n)
             System.out.printf("You have no contact that starts with %s\n\n", letter);
+
+        clearConsole();
+    }
+
+
+    static void clearConsole() {
+//        Clear the Console Screen
+
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
     }
 }
