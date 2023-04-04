@@ -11,8 +11,6 @@ public class Matrix {
          for (int i = 0; i < 2; i++) {
             for (int j = 0; j < 2; j++) {
                 int currVal = i + j + (i == 1 ? 2 : 1);
-                System.out.print(i);
-                System.out.println(j);
                 matrix1[i][j] = getValue(String.format("A%d",(currVal)));
                 matrix2[i][j] = getValue(String.format("B%d",(currVal)));
                 System.out.print("\n");
