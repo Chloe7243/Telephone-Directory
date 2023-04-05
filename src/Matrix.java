@@ -8,6 +8,9 @@ public class Matrix {
         System.out.println("========== Calculating multiplication of a 2 by 2 matrices ==========");
         System.out.println("Input your values based on this format:\n|A1 A2|   |B1 B2|\n|A3 A4| * |B3 B4|\n");
 
+
+//        GETS VALUES FOR MATRIX
+
          for (int i = 0; i < 2; i++) {
             for (int j = 0; j < 2; j++) {
                 int currVal = i + j + (i == 1 ? 2 : 1);

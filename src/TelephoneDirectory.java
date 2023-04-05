@@ -10,6 +10,7 @@ public class TelephoneDirectory {
 
     TelephoneDirectory(){
 
+//        read the current directory if it exists
         readFile();
 
         do {
@@ -23,7 +24,16 @@ public class TelephoneDirectory {
             System.out.println("7. Multiply 2 by 2 matrices");
             System.out.println("8. Quit");
 
-            option = input.nextInt();
+            System.out.print("Choose Option: ");
+
+            // Make Sure User Enters An Integer
+            try {
+                option = input.nextInt();
+            } catch (Exception e) {
+                System.out.println("Invalid option.\n");
+                input.next();
+                continue;
+            }
 
             switch (option) {
                 case 1 ->{
@@ -103,13 +113,17 @@ public class TelephoneDirectory {
         } catch (IOException e) {
             System.out.println("Error writing to file.");
         }
+
+        clearConsole();
     }
 
     static void delContact() {
-        // delete a contact
+//        Get index to delete
         System.out.println("======== DELETE A CONTACT ========");
         System.out.print("Enter index of contact to delete: ");
         int index = input.nextInt();
+
+//        Delete the contact from file
         if (index >= 0 && index < n) {
             for (int i = index; i < n - 1; i++) {
                 directory[i][0] = directory[i + 1][0];
@@ -120,13 +134,17 @@ public class TelephoneDirectory {
         } else {
             System.out.println("Invalid index.");
         }
+
+        clearConsole();
     }
 
     static void retrieveContact() {
-        // retrieve a contact
+        // retrieve a contact by index
         System.out.println("======== RETRIEVE A CONTACT ========");
         System.out.print("Enter index of contact to retrieve: ");
         int index = input.nextInt();
+
+        // display contact
         if (index >= 0 && index < n) {
             System.out.println("Name: " + directory[index][0]);
             System.out.println("Age: " + directory[index][1]);
@@ -134,15 +152,21 @@ public class TelephoneDirectory {
         } else {
             System.out.println("Invalid index.");
         }
+
+        clearConsole();
     }
 
     static void displayRange() {
         // display contacts in a range
         System.out.println("======== DISPLAY CONTACTS IN A RANGE ========");
+
+        // get range
         System.out.print("Enter start index: ");
         int start = input.nextInt();
         System.out.print("Enter end index: ");
         int end = input.nextInt();
+
+        // display contacts in the range
         System.out.printf("======== CONTACTS IN RANGE [%d - %d] ========\n", start, end);
         if (start >= 0 && end >= start && end < n) {
             for (int i = start; i <= end; i++) {
@@ -153,6 +177,8 @@ public class TelephoneDirectory {
         } else {
             System.out.println("Invalid range.\n");
         }
+
+        clearConsole();
 
     }
 
@@ -170,14 +196,20 @@ public class TelephoneDirectory {
             System.out.printf("Age: %s\n", directory[i][1]);
             System.out.printf("Contact: %s\n\n", directory[i][2]);
         }
+
+        clearConsole();
     }
 
     static void displayFirstLetter() {
         // display contacts by first letter
+
+//        get first letter
         System.out.println("======== DISPLAY CONTACTS BY FIRST LETTER ========");
         System.out.print("Enter first letter: ");
         String letter = input.next();
         int none = 0;
+
+//        display contacts that start with the letter
         System.out.printf("======== CONTACTS STARTING WITH %s ========\n", letter);
         for (int i = 0; i < n; i++) {
             if (directory[i][0].toLowerCase().startsWith(letter.toLowerCase())) {
@@ -190,5 +222,15 @@ public class TelephoneDirectory {
         }
         if(none == n)
             System.out.printf("You have no contact that starts with %s\n\n", letter);
+
+        clearConsole();
+    }
+
+
+    static void clearConsole() {
+//        Clear the Console Screen
+
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
     }
 }

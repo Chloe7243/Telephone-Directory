@@ -10,7 +10,6 @@ public class Main {
 
 //        ASKS USER FOR ACTIVITY TO BE DONE
         System.out.printf("Hey %s, what would you like to do today%n", name);
-
         //noinspection InstantiationOfUtilityClass
         new TelephoneDirectory();
 
